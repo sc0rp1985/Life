@@ -4,13 +4,18 @@ from Life.TurtleViewer import *
 import time
 
 
-
-#hash = hashlib.md5("whatever your string is".encode('utf-8')).hexdigest()
 dic = {}
 
 world = LifeWorld(20, True)
-viewer = LifeViewer()
-#viewer = TurtleViewer(800, 800)
+vm = input("select viewer: 0 - text, 1 - graphics\n")
+if vm not in {'0', '1'}:
+    raise Exception("error")
+
+if vm == '0':
+    viewer = LifeViewer()
+else:
+    viewer = TurtleViewer(800, 800)
+
 while world.next_generation():
     _hash = world.get_hash()
     val = dic.get(_hash)

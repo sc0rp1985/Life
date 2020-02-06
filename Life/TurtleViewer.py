@@ -1,6 +1,8 @@
-import turtle;
+import turtle
+from Life.Viewer import AbstractViewer
 
-class TurtleViewer:
+
+class TurtleViewer(AbstractViewer):
 
     def __init__(self, _width, _height):
         self.__win = turtle.Screen()
@@ -41,16 +43,13 @@ class TurtleViewer:
 #        self.__win.mainloop()
 
     def show_world(self, world, fix_window, legend):
-        #        if world.get_empty():
-        #            print("**********AVERYBODY IS DEAD IN GENERATION {0}************".format(world.get_generation()))
-        #            return
         cells = world.get_world()
         row_count = len(cells)
         if row_count == 0:
-            raise Exception("пусто мир")
+            raise Exception("empty world")
         col_count = len(cells[0])
         if col_count == 0:
-            raise Exception("пусто мир")
+            raise Exception("empty world")
         gen = world.get_generation()
         _l = legend
         if _l == '':
@@ -73,7 +72,6 @@ class TurtleViewer:
         self.__draw_cells(row_count, col_count, cells)
         self.__draw_legenf(legend)
         self.__win.update()
-#        turtle.done()
 
     def __draw_grid(self, row_count, col_count):
         border = turtle.Turtle()
@@ -145,6 +143,4 @@ class TurtleViewer:
         return a
 
 
-#v = TurtleViewer(900, 600)
-#v.test_draw()
-# input("a")
+
