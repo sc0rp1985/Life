@@ -18,8 +18,8 @@ class TurtleViewer(AbstractViewer):
         self.__right_x = 0 + (self.__win.window_width() / 2) - self.__x_align
         self.__up_y = 0 + (self.__win.window_height() / 2) - self.__y_align
         self.__down_y = 0 - (self.__win.window_height() / 2) + self.__y_align
-        self.__step_x = 1  # (self.__win.window_width() - (self.__y_align * 2)) / col_count
-        self.__step_y = 1  # (self.__win.window_height() - (self.__x_align * 2)) / row_count
+        self.__step_x = 1
+        self.__step_y = 1
 
         self.__cell_turtle = turtle.Turtle()
         self.__cell_turtle.speed(0)

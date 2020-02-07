@@ -16,16 +16,16 @@ class LifeWorld:
 
     def __test_init(self):
         #                  0 1 2 3 4 5 6 7 8 9
-        self.__world[0] = [1, 0, 1, 0, 0, 0, 0, 0, 0, 0]
-        self.__world[1] = [0, 1, 1, 0, 0, 0, 0, 0, 0, 0]
-        self.__world[2] = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.__world[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.__world[1] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.__world[2] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__world[3] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__world[4] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__world[5] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.__world[6] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__world[7] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__world[8] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.__world[9] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.__world[7] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+        self.__world[8] = [0, 0, 0, 0, 0, 0, 0, 1, 0, 1]
+        self.__world[9] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
         self.__empty = False
 
     def __test_random_ini(self):
@@ -36,9 +36,13 @@ class LifeWorld:
     def __get_neighbor_count(self, col, row):
         count = 0
         for i in range(row - 1, row + 2):
+            row_index = i if 0 <= i < self.__size else abs(abs(i) - self.__size)
             for j in range(col - 1, col + 2):
-                if i >= 0 and i < self.__size and j >= 0 and j < self.__size and (i != row or j != col):
-                    if self.__world[i][j] == 1:
+                col_index = j if 0 <= j < self.__size else abs(abs(j) - self.__size)
+#                if i >= 0 and i < self.__size and j >= 0 and j < self.__size and (i != row or j != col):
+#                    if self.__world[i][j] == 1:
+                if row_index != row or col_index != col:
+                    if self.__world[row_index][col_index] == 1:
                         count += 1
         return count
 
@@ -62,8 +66,8 @@ class LifeWorld:
 
         self.__empty = True
         tmp = self.__get_empty_world()
-        for row in range(self.__size - 1):
-            for col in range(self.__size - 1):
+        for row in range(self.__size):
+            for col in range(self.__size):
                 count = self.__get_neighbor_count(col, row)
                 if count > 3 or count < 2:
                     tmp[row][col] = 0
